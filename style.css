@@ -1,150 +1,142 @@
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-:root {
-    --bg-color: #000000;
-    --text-color: #fff;
-    --border-color: #ffffff;
-    --line-color: #0bcafa;
-    --hover-color: #ff6600;
-    --cell-size: 100px;
-    --mark-size: 90px;
-}
-
 body {
+    background-color: rgb(32, 32, 32);
+    background-image: url("https://res.allmacwallpaper.com/get/MacBook-Pro-12-inch-4K-Retina-wallpapers/Colorful-Rainbow-2304x1440/8092-14.jpg");
+    color: rgb(230, 230, 230);
+    text-align: center;
+    font-family: 'Indie Flower', 'Comic Sans', cursive;
+    font-size: 0.7em;
+}
+h1 {
+    line-height: 1em;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+    font-size: 2.8em;
+    font-weight: bold;
+}
+h2 {
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+
+}
+h3 {
+    font-size: 1.1em;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    padding: 0;
+    margin: 10px 0 2px 0;
+}
+table {
+    margin: 2% auto;
+    border-collapse: collapse;
+}
+#table_game {
+    position: relative;
+    font-size: 120px;
+    margin: 1% auto;
+    border-collapse: collapse;
+}
+.td_game {
+    border: 4px solid rgb(230, 230, 230);
+    width: 90px;
+    height: 90px;
+    padding: 0;
+    vertical-align: middle;
+    text-align: center;
+}
+.fixed {
+    width: 90px;
+    height: 90px;
+    line-height: 90px;
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+}
+.td_list {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+.th_list {
+    font-size: 1.3em;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline;
+}
+#restart {
+    font-size: 3em;
+    width: 1em;
+    height: 0.9em;
+    cursor: pointer;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.x {
+    color: rgb(0, 230, 247);
+    position: relative;
+    top: -8px;
+    font-size: 1.2em;
+    cursor: default;
+}
+.o {
+    color: rgb(238, 158, 9);
+    position: relative;
+    top: -7px;
+    font-size: 1.0em;
+    cursor: default;
+}
+
+/* modal background */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* enable scroll if needed */
+    background-color: black; /* fallback color */
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* modal content */
+.modal-content {
+    background-color: rgb(240, 240, 240);
+    color: rgb(32, 32, 32);
+    font-size: 2em;
+    font-weight: bold;
+    /* 16 % from the top and centered */
+    margin: 16% auto;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 380px;
+    max-width: 80%;
+}
+.modal-content p {
     margin: 0;
     padding: 0;
-    background-color: var(--bg-color)
 }
 
-.board {
-    width: 100vh;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-}
-
-.cell {
-    width: var(--cell-size);
-    height: var(--cell-size);
-    border: 2px solid var(--border-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* close button for modal dialog */
+.close {
+    color: rgb(170, 170, 170);
+    float: right;
     position: relative;
+    top: -25px;
+    right: -10px;
+    font-size: 34px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
     cursor: pointer;
 }
 
-.cell:first-child,
-.cell:nth-child(2),
-.cell:nth-child(3) {
-    border-top: 0;
+.win-color {
+    background-color: rgb(240, 240, 240);
 }
-
-.cell:last-child,
-.cell:nth-child(8),
-.cell:nth-child(7) {
-    border-bottom: 0;
-}
-
-.cell:nth-child(3n+1) {
-    border-left: 0;
-}
-
-.cell:nth-child(3n+3) {
-    border-right: 0;
-}
-
-
-.cell.cross::before,
-.cell.cross::after,
-.board.cross .cell:not(.cross):not(.circle):hover::before,
-.board.cross .cell:not(.cross):not(.circle):hover::after {
-    content: "";
-    position: absolute;
-    width: calc(var(--mark-size)*.13);
-    height: var(--mark-size);
-    background-color: var(--line-color);
-}
-
-.cell.cross::before,
-.board.cross .cell:not(.cross):not(.circle):hover::before {
-    transform: rotate(45deg);
-}
-
-.cell.cross::after,
-.board.cross .cell:not(.cross):not(.circle):hover::after {
-    transform: rotate(-45deg);
-}
-
-.cell.circle::before,
-.cell.circle::after,
-.cell:not(.cross):not(.circle):hover::before,
-.cell:not(.cross):not(.circle):hover::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    background-color: var(--line-color)
-}
-
-.cell.circle::before,
-.cell:not(.cross):not(.circle):hover::before {
-    width: calc(var(--mark-size)*.9);
-    height: calc(var(--mark-size)*.9);
-}
-
-.cell.circle::after,
-.cell:not(.cross):not(.circle):hover::after {
-    width: calc(var(--mark-size)*.65);
-    height: calc(var(--mark-size)*.65);
-    background-color: var(--bg-color);
-}
-
-.cell:not(.cross):not(.circle):hover::before,
-.board.cross .cell:not(.cross):not(.circle):hover::before,
-.board.cross .cell:not(.cross):not(.circle):hover::after {
-    background-color: var(--hover-color);
-}
-
-.cell.cross,
-.cell.circle {
-    cursor: not-allowed;
-}
-
-
-
-.result {
-    display: none;
-    flex-direction:column;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: var(--text-color);
-    font-size: 5rem;
-}
-
-.result button {
-    background-color:#fff;
-    color: #000000;
-    padding: .25em .5em ;
-    font-size: 2rem;
-    cursor: pointer;
-    border:0;
-}
-
-.result button:hover {
-    background-color:#ea1d5d;
-    color: #ffffff;
-}
-.result.show{display:flex;}
